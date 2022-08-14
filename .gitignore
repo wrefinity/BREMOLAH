@@ -2,3 +2,4 @@ docker-compose-dev.yml
 docker-compose-prod.yml
 .vscode
 node_modules
+ec2
