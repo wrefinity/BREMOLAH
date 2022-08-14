@@ -7,7 +7,8 @@
 Caddyfile.local
 Caddyfile.prod
 .env
-
+Dockerfile
+Dockerfile.production
 # testing
 /coverage
 
