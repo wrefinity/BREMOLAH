@@ -26,7 +26,6 @@ export default async () => {
           password: process.env.ADMIN_PASSWORD,
         });
       }
-      console.log("admin created");
     } catch (e) {
       console.log(e);
     }
