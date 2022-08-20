@@ -16,11 +16,11 @@ export const createPayments = (payment, token) => async (dispatch) => {
          payment,
          token
       );
-      if (res.status === 200) {
-         dispatch({ type: CREATE_PAYMENT, payload: res.data });
-         return { status: res.status, data: res.data };
+      if (res?.status === 200) {
+         dispatch({ type: CREATE_PAYMENT, payload: res?.data });
+         return { status: res?.status, data: res?.data };
       } else {
-         return { status: res.status, data: res.data };
+         return { status: res?.status, data: res?.data };
       }
    } catch (error) {
    }
@@ -33,11 +33,11 @@ export const updatePayments = (payment, token) => async (dispatch) => {
          payment,
          token
       );
-      if (res.status === 200) {
-         dispatch({ type: UPDATE_PAYMENT, payload: res.data });
-         return { status: res.status, data: "status update successfully" };
+      if (res?.status === 200) {
+         dispatch({ type: UPDATE_PAYMENT, payload: res?.data });
+         return { status: res?.status, data: "status update successfully" };
       } else {
-         return { status: res.status, data: res.data };
+         return { status: res?.status, data: res?.data };
       }
    } catch (error) {
    }
@@ -46,11 +46,11 @@ export const updatePayments = (payment, token) => async (dispatch) => {
 export const fetchPayments = (token) => async (dispatch) => {
    try {
       const res = await axiosGetHeader(urlCreateGetDeleteUpdatePayment, token);
-      if (res.status === 200) {
-         dispatch({ type: FETCH_PAYMENT, payload: res.data });
-         return { status: res.status, data: res.data };
+      if (res?.status === 200) {
+         dispatch({ type: FETCH_PAYMENT, payload: res?.data });
+         return { status: res?.status, data: res?.data };
       } else {
-         return { status: res.status, data: res.data };
+         return { status: res?.status, data: res?.data };
       }
    } catch (error) {
    }

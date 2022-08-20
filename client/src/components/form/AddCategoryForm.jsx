@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useCookies } from "react-cookie";
 import { LineWave } from "react-loader-spinner";
@@ -18,6 +18,7 @@ const AddCategoryForm = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const dispatch = useDispatch();
   const [user] = useCookies("user");
+  const referal = useRef();
 
   const reset = () => {
     setCategory({
@@ -25,9 +26,6 @@ const AddCategoryForm = () => {
       description: "",
     });
   }
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -36,14 +34,18 @@ const AddCategoryForm = () => {
   };
 
   useEffect(() => {
+    referal.current();
+  }, [formErrors]);
+
+  const addCat = async () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       dispatch(createCat(category, user.user.token, toast));
       reset();
     } 
     setLoading(false)
-      
-  }, [formErrors]);
+  };
 
+  referal.current = addCat;
   return (
     <div className="site-section">
       <div className="container">

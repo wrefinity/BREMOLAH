@@ -3,7 +3,11 @@ import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
 import moment from "moment";
-import { fetchCart, removeFromCart, decrementIncrementQuantity} from "../../actions/cart";
+import {
+  fetchCart,
+  removeFromCart,
+  decrementIncrementQuantity,
+} from "../../actions/cart";
 const CartItems = () => {
   const [cookies] = useCookies();
   const dispatch = useDispatch();
@@ -20,11 +24,11 @@ const CartItems = () => {
     dispatch(removeFromCart(cart._id, user.token));
   };
   const handleIncrementQuantity = (cart) => {
-    const data = {tagger:'increment'} 
+    const data = { tagger: "increment" };
     dispatch(decrementIncrementQuantity(cart.productId._id, data, user.token));
   };
   const handleDecrementQuantity = (cart) => {
-    const data = {tagger:'decrement'} 
+    const data = { tagger: "decrement" };
     dispatch(decrementIncrementQuantity(cart.productId._id, data, user.token));
   };
 
@@ -58,10 +62,19 @@ const CartItems = () => {
           </td>
           <td className="h5 text-black">&#8358;{product.price}</td>
           <td className="h5 text-black">
-
-            <button onClick={() => handleDecrementQuantity(product)} className="btn btn-sm btn-default"><span className="text-danger fw-bold h4">-</span></button>
+            <button
+              onClick={() => handleDecrementQuantity(product)}
+              className="btn btn-sm btn-default"
+            >
+              <span className="text-danger fw-bold h4">-</span>
+            </button>
             <span className="ml-2 mr-2">{product.quantity}</span>
-            <button onClick={() => handleIncrementQuantity(product)}className="btn btn-sm btn-default"><span className="text-success fw-bold h4">+</span></button>
+            <button
+              onClick={() => handleIncrementQuantity(product)}
+              className="btn btn-sm btn-default"
+            >
+              <span className="text-success fw-bold h4">+</span>
+            </button>
           </td>
           <td className="h5 text-black">&#8358;{product.total}</td>
           <td>
@@ -114,7 +127,7 @@ const CartItems = () => {
                 </Link>
               </div>
               <div className="col-md-6">
-                <Link to={`/payment`}>
+                <Link to={cartData.length <= 0 ? `/shop`: `/payment` }>
                   <button
                     className="btn btn-sm btn-success mr-1"
                     data-toggle="modal"

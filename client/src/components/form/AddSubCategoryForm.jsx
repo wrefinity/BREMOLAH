@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { LineWave } from "react-loader-spinner";
@@ -24,6 +24,7 @@ const AddCategoryForm = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const dispatch = useDispatch();
   const [user] = useCookies("user");
+  const referal = useRef();
 
   const categories = useSelector((state) => state.categories);
 
@@ -53,19 +54,22 @@ const AddCategoryForm = () => {
     e.preventDefault();
     setLoading(true);
     setFormErrors(validateEmpty(subCategory));
-    setIsSubmit(true);  
-  }
+    setIsSubmit(true);
+  };
 
   useEffect(() => {
+    referal.current();
+  }, [formErrors]);
+
+  const subCat = async () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       dispatch(createSubCat(subCategory, user.user.token, toast));
       reset();
-    } 
-    setLoading(false)
-      
-  }, [formErrors]);
+    }
+    setLoading(false);
+  };
 
-
+  referal.current = subCat;
 
   return (
     <div className="site-section">
@@ -136,7 +140,7 @@ const AddCategoryForm = () => {
                 </div>
                 <div className="form-group row">
                   <div className="col-lg-12">
-                  <p className="h5 text-danger m-2">{formErrors?.all}</p>
+                    <p className="h5 text-danger m-2">{formErrors?.all}</p>
                     {!loading && (
                       <button className="btn btn-danger btn-block bold-text">
                         Add Sub Category

@@ -23,7 +23,7 @@ export const createSubCat = (subCategory, token, toast) => async (dispatch) => {
       token
     );
     if (res.status === 200) {
-      dispatch({ type: CREATE_SUB_CATEGORY, payload: res.data });
+      dispatch({ type: CREATE_SUB_CATEGORY, payload: res?.data });
       toast.success("sub-category added", { autoClose: 2000 });
     } else {
       toast.error("an error occureed", { autoClose: 2000 });
@@ -35,7 +35,7 @@ export const createSubCat = (subCategory, token, toast) => async (dispatch) => {
 
 export const fetchSubCat = () => async (dispatch) => {
   const res = await axiosGet(urlCreateGetDeleteSubCategory);
-  dispatch({ type: FETCH_SUB_CATEGORY, payload: res.data });
+  dispatch({ type: FETCH_SUB_CATEGORY, payload: res?.data });
 };
 
 export const updateSubCat =
@@ -48,11 +48,11 @@ export const updateSubCat =
       );
 
       if (res.status === 200) {
-        dispatch({ type: UPDATE_SUB_CATEGORY, payload: res.data });
+        dispatch({ type: UPDATE_SUB_CATEGORY, payload: res?.data });
         toast.success("Sub category updated successfully", { autoClose: 2000 });
         closeRef.current.click();
       } else {
-        toast.error(`${res.data}`, { autoClose: 2000 });
+        toast.error(`${res?.data}`, { autoClose: 2000 });
       }
     } catch (error) {
       toast.error("Oops, an error has occured", { autoClose: 2000 });
@@ -67,8 +67,7 @@ export const deleteSubCat = (id, token) => async (dispatch) => {
     );
     if (res.status === 200) {
       dispatch({ type: DELETE_SUB_CATEGORY, payload: id });
-      return { status: res.status, data: res.data };
+      return { status: res.status, data: res?.data };
     }
-  } catch (error) {
-  }
+  } catch (error) {}
 };

@@ -21,6 +21,7 @@ const Categories = () => {
   const [user] = useCookies("user");
   const categories = useSelector((state) => state.categories);
   const closeRef = useRef();
+  const referal = useRef();
   const navigate = useNavigate();
 
   const [param] = useSearchParams();
@@ -83,15 +84,20 @@ const Categories = () => {
   };
 
   useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      dispatch(updateCat(category, user.user.token, toast, closeRef));
-      reset();
-    }
+    referal.current();
   }, [formErrors]);
 
   const handleDeleteCategory = async (id) => {
     await dispatch(deleteCat(id, user.user.token));
   };
+
+  const catUp = async () => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      dispatch(updateCat(category, user.user.token, toast, closeRef));
+      reset();
+    }
+  };
+  referal.current = catUp;
 
   return (
     <div className="site-section">

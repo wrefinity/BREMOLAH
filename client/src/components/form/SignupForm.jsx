@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LineWave } from "react-loader-spinner";
@@ -22,6 +22,8 @@ const SignupForm = () => {
    const [loading, setLoading] = useState(false);
    const dispatch = useDispatch();
    const navigate = useNavigate();
+   const referal = useRef();
+
 
    const reset = () => {
       setSignData({
@@ -38,6 +40,10 @@ const SignupForm = () => {
    };
    
    useEffect(() => {
+      referal.current()
+   }, [formErrors])
+
+   const signupUser = async()=>{
       if (Object.keys(formErrors).length === 0 && isSubmit) {
          setLoading(false)
          dispatch(createUsers(signData, navigate, toast))
@@ -46,7 +52,9 @@ const SignupForm = () => {
       else{
          setLoading(false)
       }
-   }, [formErrors])
+   }
+
+   referal.current = signupUser
 
    const handleOnSubmit = (e) => {
       e.preventDefault();

@@ -19,10 +19,10 @@ export const createCat = (category, token, toast) => async (dispatch) => {
       token
     );
     if (res.status === 200) {
-      dispatch({ type: CREATE_CATEGORY, payload: res.data });
+      dispatch({ type: CREATE_CATEGORY, payload: res?.data });
       toast.success("Category updated successfully", { autoClose: 2000 });
     } else {
-      toast.error(`${res.data}`, { autoClose: 2000 });
+      toast.error(`${res?.data}`, { autoClose: 2000 });
     }
   } catch (error) {
     toast.error("Oops, an error has occured", { autoClose: 2000 });
@@ -33,7 +33,7 @@ export const fetchCat = () => async (dispatch) => {
   try {
     const res = await axiosGet(urlCreateGetDeleteCategory);
     if (res.status === 200) {
-      dispatch({ type: FETCH_CATEGORY, payload: res.data });
+      dispatch({ type: FETCH_CATEGORY, payload: res?.data });
     }
   } catch (error) {
   }
@@ -47,11 +47,11 @@ export const updateCat = (category, token, toast, closeRef) => async (dispatch) 
       token
     );
     if (res.status === 200) {
-      dispatch({ type: UPDATE_CATEGORY, payload: res.data });
+      dispatch({ type: UPDATE_CATEGORY, payload: res?.data });
       toast.success("Category updated successfully", { autoClose: 2000 });
       closeRef.current.click()
     } else {
-      toast.success(`${res.data}`, { autoClose: 2000 });
+      toast.error(`${res?.data}`, { autoClose: 2000 });
     }
   } catch (error) {
     toast.error("Oops, an error has occured", { autoClose: 2000 });
@@ -63,7 +63,7 @@ export const deleteCat = (id, token) => async (dispatch) => {
     const res = await axiosDelete(`${urlCreateGetDeleteCategory}/${id}`, token);
     if (res.status === 200) {
       dispatch({ type: DELETE_CATEGORY, payload: id });
-      return { status: res.status, data: res.data };
+      return { status: res.status, data: res?.data };
     }
   } catch (error) {
   }

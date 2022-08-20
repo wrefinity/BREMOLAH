@@ -40,7 +40,7 @@ const ContactForm = () => {
                 </div>
                 <div className="form-group row">
                   <div className="col-md-12">
-                    <label for="c_lname" className="text-black">
+                    <label htmlFor="c_lname" className="text-black">
                       Fullname <span className="text-danger">*</span>
                     </label>
                     <input
@@ -54,7 +54,7 @@ const ContactForm = () => {
                 </div>
                 <div className="form-group row">
                   <div className="col-md-12">
-                    <label for="c_email" className="text-black">
+                    <label htmlFor="c_email" className="text-black">
                       Email <span className="text-danger">*</span>
                     </label>
                     <input
@@ -70,7 +70,7 @@ const ContactForm = () => {
 
                 <div className="form-group row">
                   <div className="col-md-12">
-                    <label for="c_message" className="text-black">
+                    <label htmlFor="c_message" className="text-black">
                       Message{" "}
                     </label>
                     <textarea

@@ -22,8 +22,8 @@ const Categories = () => {
   const categories = useSelector((state) => state.categories);
   const subCategories = useSelector((state) => state.subCategories);
   const closeRef = useRef();
+  const referal = useRef();
   const navigate = useNavigate();
-
   const [param] = useSearchParams();
   const search = param.get("search");
 
@@ -107,11 +107,17 @@ const Categories = () => {
   };
 
   useEffect(() => {
+    referal.current();
+  }, [formErrors]);
+
+  const subCatty = async () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       dispatch(updateSubCat(subCategory, user.user.token, toast, closeRef));
       reset();
     }
-  }, [formErrors]);
+  };
+
+  referal.current = subCatty;
 
   const handleDeleteSubCategory = async (id) => {
     await dispatch(deleteSubCat(id, user.user.token));

@@ -23,7 +23,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (user) {
-      dispatch(fetchCart(user._id, user.token));
+      dispatch(fetchCart(user?._id, user.token));
     }
   }, [user, dispatch]);
 
@@ -140,7 +140,11 @@ const Navbar = () => {
               <div className="">
                 <Link to="/" className="js-logo-clone logo" alt="breem">
                   {/* bremolah */}
-                  <img src="images/site-logo.png" className="logo-img" alt="logggooos"/>
+                  <img
+                    src="images/site-logo.png"
+                    className="logo-img"
+                    alt="logggooos"
+                  />
                 </Link>
               </div>
             </div>

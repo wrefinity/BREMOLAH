@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
@@ -26,6 +26,7 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const referal = useRef();
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -33,17 +34,22 @@ const LoginForm = () => {
     setFormErrors(validate(loginData));
     setIsSubmit(true);
   };
-
+  
   useEffect(() => {
+    referal.current();
+  }, [formErrors]);
+
+  const loginuser = async () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      setLoading(false)
+      setLoading(false);
       dispatch(loginUser(loginData, navigate, setCookies, toast));
       reset();
-    } 
-    else {
-      setLoading(false)
+    } else {
+      setLoading(false);
     }
-  }, [formErrors]);
+  };
+
+  referal.current = loginuser;
 
   const reset = () => {
     setLoginData({
@@ -79,7 +85,7 @@ const LoginForm = () => {
                       id="c_email"
                       placeholder="enter your email"
                     />
-                     <p className="text-danger">{formErrors.email}</p>
+                    <p className="text-danger">{formErrors.email}</p>
                   </div>
                 </div>
 
@@ -102,7 +108,6 @@ const LoginForm = () => {
                     />
                     <p className="text-danger">{formErrors.password}</p>
                   </div>
-                
                 </div>
 
                 <div className="form-group row">

@@ -15,8 +15,8 @@ const { urlCreateGetDeleteUpdateProduct } = productRoutes;
 export const getProducts = () => async (dispatch) => {
   try {
     const res = await axiosGet(urlCreateGetDeleteUpdateProduct);
-    if (res.status === 200) {
-      dispatch({ type: FETCH_PRODUCT, payload: res.data });
+    if (res?.status === 200) {
+      dispatch({ type: FETCH_PRODUCT, payload: res?.data });
     }
   } catch (error) {
   }
@@ -29,11 +29,11 @@ export const createProducts = (product, token, toast) => async (dispatch) => {
       product,
       token
     );
-    if (res.status === 200) {
-      dispatch({ type: CREATE_PRODUCT, payload: res.data });
+    if (res?.status === 200) {
+      dispatch({ type: CREATE_PRODUCT, payload: res?.data });
       toast.success("product added successfully", { autoClose: 2000 });
     } else {
-      toast.error(`${res.data}`, { autoClose: 2000 });
+      toast.error(`${res?.data}`, { autoClose: 2000 });
     }
   } catch (error) {
     toast.error(`Something went wrong`, { autoClose: 2000 });
@@ -48,12 +48,12 @@ export const updateProduct =
         updatedProduct,
         token
       );
-      if (res.status === 200) {
-        dispatch({ type: UPDATE_PRODUCT, payload: res.data });
+      if (res?.status === 200) {
+        dispatch({ type: UPDATE_PRODUCT, payload: res?.data });
         toast.success(`product updated successfully`, { autoClose: 2000 });
         navigate("/items");
       } else {
-        toast.error(`${res.data}`, { autoClose: 2000 });
+        toast.error(`${res?.data}`, { autoClose: 2000 });
       }
     } catch (error) {
       toast.error(`Something went wrong`, { autoClose: 2000 });
@@ -66,11 +66,11 @@ export const deleteProduct = (id, token) => async (dispatch) => {
       `${urlCreateGetDeleteUpdateProduct}/${id}`,
       token
     );
-    if (res.status === 200) {
+    if (res?.status === 200) {
       dispatch({ type: DELETE_PRODUCT, payload: id });
-      return { status: res.status, data: res.data };
+      return { status: res?.status, data: res?.data };
     } else {
-      return { status: res.status, data: res.data };
+      return { status: res?.status, data: res?.data };
     }
   } catch (error) {
   }

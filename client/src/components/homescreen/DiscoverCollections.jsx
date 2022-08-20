@@ -9,7 +9,7 @@ const DiscoverCollections = () => {
     let proc = [];
     categories.forEach((cat) => {
       let num = products?.filter((pro) => pro.category === cat._id);
-      proc.push({ len: num.length, name: cat.name, image: num[0].image });
+      proc.push({ len: num.length, name: cat.name, image: num[0]?.image });
     });
     return proc;
   };
@@ -26,6 +26,7 @@ const DiscoverCollections = () => {
       </div>
     );
   });
+  
   return (
     <div className="site-section">
       <div className="container">

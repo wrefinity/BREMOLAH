@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LineWave } from "react-loader-spinner";
 import { toast } from "react-toastify";
@@ -46,6 +46,7 @@ const UpdateProductForm = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const dispatch = useDispatch();
   const [cookies] = useCookies();
+  const referal = useRef();
   const user = cookies.user;
   const handleInputImage = (name, value) => {
     setProduct((prev) => ({ ...prev, [name]: value }));
@@ -99,12 +100,18 @@ const UpdateProductForm = () => {
   };
 
   useEffect(() => {
+    referal.current();
+  }, [formErrors]);
+
+  const profiler = async () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       dispatch(updateProduct(product, user?.token, toast, navigate));
       reset();
     }
     setLoading(false)
-  }, [formErrors]);
+  };
+
+  referal.current = profiler;
 
   return (
     <div className="site-section">
