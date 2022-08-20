@@ -70,5 +70,4 @@ listen [::]:80 default_server;
         location /api/ {
                 proxy_pass http://localhost:5000;
         }
-
 }
