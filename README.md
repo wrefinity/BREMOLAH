@@ -52,6 +52,7 @@ follow the below links
 # configure nginx
 
 cd /etc/nginx/sites-enabled/
+sudo rm -r default
 sudo vim default
 
 server {
