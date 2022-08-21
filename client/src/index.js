@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { compose, applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import reducers from "./reducerx";
+import reportWebVitals from './reportWebVitals';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 ReactDOM.render(
@@ -22,3 +23,4 @@ ReactDOM.render(
    </React.StrictMode>,
    document.getElementById("root")
 );
+reportWebVitals();

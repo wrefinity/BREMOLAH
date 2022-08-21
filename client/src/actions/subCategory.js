@@ -22,11 +22,11 @@ export const createSubCat = (subCategory, token, toast) => async (dispatch) => {
       subCategory,
       token
     );
-    if (res.status === 200) {
+    if (res?.status === 200) {
       dispatch({ type: CREATE_SUB_CATEGORY, payload: res?.data });
       toast.success("sub-category added", { autoClose: 2000 });
     } else {
-      toast.error("an error occureed", { autoClose: 2000 });
+      toast.error("an error occurred", { autoClose: 2000 });
     }
   } catch (error) {
     toast.error(`${error.message}`, { autoClose: 2000 });
@@ -47,7 +47,7 @@ export const updateSubCat =
         token
       );
 
-      if (res.status === 200) {
+      if (res?.status === 200) {
         dispatch({ type: UPDATE_SUB_CATEGORY, payload: res?.data });
         toast.success("Sub category updated successfully", { autoClose: 2000 });
         closeRef.current.click();
@@ -65,9 +65,9 @@ export const deleteSubCat = (id, token) => async (dispatch) => {
       `${urlCreateGetDeleteSubCategory}/${id}`,
       token
     );
-    if (res.status === 200) {
+    if (res?.status === 200) {
       dispatch({ type: DELETE_SUB_CATEGORY, payload: id });
-      return { status: res.status, data: res?.data };
+      return { status: res?.status, data: res?.data };
     }
   } catch (error) {}
 };

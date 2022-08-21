@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import DiscoverSingles from "./DiscoverSingles";
 
 const DiscoverCollections = () => {
   const categories = useSelector((state) => state.categories);
@@ -15,18 +16,9 @@ const DiscoverCollections = () => {
   };
 
   const categorizerMapper = itemCount().map((pro) => {
-    return (
-      <div className="col-lg-4">
-        <div className="product-item sm-height bg-gray mb-4">
-          <a href="/" className="product-category">
-            {pro.name} <span>{pro.len} items</span>
-          </a>
-          <img src={pro.image} alt={pro.len} className="img-fluid" />
-        </div>
-      </div>
-    );
+    return <DiscoverSingles key="{pro._id}" pro={pro} />;
   });
-  
+
   return (
     <div className="site-section">
       <div className="container">

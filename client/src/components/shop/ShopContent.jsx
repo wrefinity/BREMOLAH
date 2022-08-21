@@ -96,7 +96,7 @@ const ShopContent = () => {
       return 0;
     })
     .map((product) => {
-      return <ShopElements key={product._id} product={product} />;
+      return <ShopElements key="{product._id}" product={product} />;
     });
 
   return (
