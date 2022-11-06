@@ -46,7 +46,7 @@ const CartItems = () => {
     )
     .map((product) => {
       return (
-        <tr>
+        <tr key={product._id}>
           <td className="bold-text">
             <img
               src={product.image}

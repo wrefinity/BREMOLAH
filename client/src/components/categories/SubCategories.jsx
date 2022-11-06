@@ -215,7 +215,7 @@ const Categories = () => {
                         }}
                         value={subCategory.category}
                       >
-                        <option selected>Select category</option>
+                        <option>Select category</option>
                         {categoriesOption}
                       </select>
                     </div>

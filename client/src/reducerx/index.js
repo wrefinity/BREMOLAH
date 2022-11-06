@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-
 import products from "./product";
 import users from "./users";
 import payments from "./payment";

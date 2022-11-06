@@ -45,7 +45,7 @@ export const createUsers = (users, navigate, toast) => async (dispatch) => {
       toast.success("Registered Successfully", { autoClose: 2000 });
       navigate("/login");
     } else {
-      toast.error(`${res.data?.message}`, { autoClose: 2000 });
+      toast.error(`${res.data?.message}`, { autoClose: 2000});
     }
   } catch (error) {
     toast.error("Oops! try again", { autoClose: 2000 });

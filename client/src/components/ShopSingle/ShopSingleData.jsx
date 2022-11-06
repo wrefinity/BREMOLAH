@@ -1,34 +1,32 @@
-import React, { Fragment } from "react";
-// import { useCookies } from "react-cookie";
-import { useSelector } from "react-redux";
-// import { useDispatch, useSelector } from "react-redux";
-// import { toast } from "react-toastify";
-// import { AddToCart } from "../../actions/cart";
+import React, { Fragment, useState } from "react";
+import { useCookies } from "react-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { AddToCart } from "../../actions/cart";
 import { useParams } from "react-router-dom";
 
 const ShopSingleData = () => {
-  //   const [cookies] = useCookies();
-  //   const user = cookies.user;
+  const [cookies] = useCookies();
+  const user = cookies.user;
   const { productId } = useParams();
   const products = useSelector((state) => state.products);
   const productArray = products.filter((product) => product._id === productId);
   const product = productArray[0];
   const text = `Hi, i want to order for the product: ${product?.name} for the price: ${product?.price} with the description: ${product?.description}`;
-  // const [cart] = useState({
-  //    productId: product?._id,
-  //    quantity: 1,
-  // });
-  // const dispatch = useDispatch();
+  const [cart] = useState({
+    productId: product?._id,
+    quantity: 1,
+  });
+  const dispatch = useDispatch();
 
-  // const handleAddToCart = async () => {
-  //    const res = await dispatch(AddToCart(cart, user.token));
-  //    if (res.status === 200) {
-  //       toast.success(`${res.data}`, {autoClose: 2000});
-  //    } else {
-  //       toast.error(`${res.data}`, {autoClose: 2000});
-  //    }
-  // };
-  // onClick={handleAddToCart}
+  const handleAddToCart = async () => {
+    const res = await dispatch(AddToCart(cart, user.token));
+    if (res.status === 200) {
+      toast.success(`${res.data}`, { autoClose: 2000 });
+    } else {
+      toast.error(`${res.data}`, { autoClose: 2000 });
+    }
+  };
 
   return (
     <Fragment>
@@ -58,10 +56,16 @@ const ShopSingleData = () => {
                 <a
                   href={`https://api.whatsapp.com/send?phone=2348068659608&text=${text}`}
                 >
-                  <button className="buy-now btn btn-sm height-auto px-4 py-3 btn-primary m-3">
-                    Add To Cart
+                  <button className="buy-now btn btn-sm height-auto px-4 py-3 btn-outline-success m-3">
+                    Whatsapp
                   </button>
                 </a>
+                <button
+                  className="buy-now btn btn-sm height-auto px-4 py-3 btn-primary m-3"
+                  onClick={handleAddToCart}
+                >
+                  Add To Cart
+                </button>
               </p>
             </div>
           </div>

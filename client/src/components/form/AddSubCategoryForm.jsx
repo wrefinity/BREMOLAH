@@ -116,7 +116,7 @@ const AddCategoryForm = () => {
                       }}
                       value={subCategory.category}
                     >
-                      <option selected>Select category</option>
+                      {/* <option selected>Select category</option> */}
                       {categoriesOption}
                     </select>
                   </div>
